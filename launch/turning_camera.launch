@@ -2,7 +2,7 @@
 <launch>
   
   <!-- Load the robot description (Xacro) into the ROS Parameter Server -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find exprob_ros)/urdf/robot_camera_control.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find exp_rob_assignment)/urdf/robot_camera_control.xacro" />
   
   <!-- Launch the robot_state_publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
@@ -11,11 +11,11 @@
   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 
   <!-- Launch RViz for visualization -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exprob_ros)/rviz/robot_camera.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_rob_assignment)/rviz/robot_camera.rviz" />
 
   <!-- Launch Gazebo with the specified world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-    <arg name="world_name" value="$(find exprob_ros)/worlds/aruco_disordered.world" />
+    <arg name="world_name" value="$(find exp_rob_assignment)/worlds/aruco_disordered.world" />
     <arg name="paused" value="false"/>
   </include>
   
@@ -24,14 +24,14 @@
     args="-urdf -model robot1 -param robot_description -z 0.05 -Y 0.7"/> 
 
   <!-- Load controller yaml file for camera rotation -->
-  <rosparam file="$(find exprob_ros)/config/control_config.yaml" command="load" ns="/robot" />
+  <rosparam file="$(find exp_rob_assignment)/config/control_config.yaml" command="load" ns="/robot" />
 
   <!-- Load controller spawner for camera rotation -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" 
           args="--namespace=/robot joint_state_controller camera_vel_controller" />
 
   <!-- Run Python script that detects aruco markers -->
-  <node name="aruco_marker_detector" pkg="exprob_ros" type="marker_detector_camera.py" output="screen"/>
+  <node name="aruco_marker_detector" pkg="exp_rob_assignment" type="marker_detector_camera.py" output="screen"/>
   
 </launch>
 

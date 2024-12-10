@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_camera_xacro">
-<xacro:include filename="$(find exprob_ros)/urdf/robot_camera.gazebo"/>
+<xacro:include filename="$(find exp_rob_assignment)/urdf/robot_camera.gazebo"/>
 					
 	<xacro:property name="length_wheel" value="0.04" />
 	<xacro:property name="radius_wheel" value="0.1" />
