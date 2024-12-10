@@ -21,10 +21,10 @@
   
   <!-- Run Python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-    args="-urdf -model robot1 -param robot_description -z 0.05 -Y 0.7"/> 
+    args="-urdf -model robot1 -param robot_description -z 0.05 -Y 0.6"/> 
 
   <!-- Load controller yaml file for camera rotation -->
-  <rosparam file="$(find exp_rob_assignment)/config/control_config.yaml" command="load" ns="/robot" />
+  <rosparam file="$(find exp_rob_assignment)/config/control_config.yaml" command="load" />
 
   <!-- Load controller spawner for camera rotation -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" 
