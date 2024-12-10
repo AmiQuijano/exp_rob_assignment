@@ -16,7 +16,7 @@
   <!-- Launch Gazebo with the specified world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
     <arg name="world_name" value="$(find exp_rob_assignment)/worlds/aruco_disordered.world" />
-    <arg name="paused" value="true"/>
+    <arg name="paused" value="false"/>
   </include>
   
   <!-- Run Python script to the send a service call to gazebo_ros to spawn a URDF robot -->
