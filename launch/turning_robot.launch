@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <!-- Load the robot description (Xacro) into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find exprob_ros)/urdf/robot_camera.xacro" />
+  
+  <!-- Launch the robot_state_publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Launch joint state publisher GUI for visualization -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+  <!-- Launch RViz for visualization -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exprob_ros)/rviz/robot_camera.rviz" />
+
+  <!-- Launch Gazebo with the specified world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
+    <arg name="world_name" value="$(find exprob_ros)/worlds/aruco_disordered.world" />
+    <arg name="paused" value="true"/>
+  </include>
+  
+  <!-- Run Python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model robot1 -param robot_description -z 0.05 -Y 0.7"/> 
+
+  <!-- Run Python script that detects aruco markers -->
+  <node name="marker_detector" pkg="exprob_ros" type="marker_detector_robot.py" output="screen"/>
+  
+</launch>
+
