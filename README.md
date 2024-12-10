@@ -1,6 +1,12 @@
 # exp_rob_assignment
 Assignments for the Experimental Robotics Laboratory course.
 
+## Description
+5 Aruco markers are placed in a circle around a robot spawned in the center. The task has 2 modalities:
+
+1. Turn the robot until it finds and detects all 5 markers. After that, turn the robot for searching the markers one by one, in ascending order according to ID number. Once a marker is found (in order), take the image from the camera feedback where the marker was found, draw a circle around it and publish it in a custom publisher.
+2. Repeat the same but without turning the robot, but only turning the camera.
+
 ## Requirements
 The following package runs with ROS in Ubuntu 20.04
 It requires previous installation of OpenCV libraries, ros_controller, gazebo control, and aruco markers. 
